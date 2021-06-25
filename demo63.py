@@ -25,3 +25,10 @@ def build_model():
 
 model = build_model()
 model.summary()
+model.fit(train_data, train_targets, validation_split=0.1,
+          epochs=100, batch_size=5, verbose=1)
+
+for i, j in zip(test_data, test_targets):
+    predict = model.predict(i.reshape(1, -1))
+    predict_value = predict[0][0]
+    print(f"predict as:{predict_value:.2f}, real as:{j:.2f}, diff is:{predict_value - j:.2f}")
